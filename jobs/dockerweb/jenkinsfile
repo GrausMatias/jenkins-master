@@ -25,11 +25,11 @@ pipeline {
                          docker stop ${name_final}
                     '''
                     }
-                    
+
                 }                    
-                                  
+
             }
-           
+
         stage('build') {
             steps {
                 script{
@@ -37,23 +37,23 @@ pipeline {
                     docker build    jobs/dockerweb/ -t ${name_imagen}:${tag_imagen}
                     '''
                     }
-                    
+
                 }                    
-                                  
+
             }
             stage('run') {
             steps {
                 script{
                     sh ''' 
                         docker run -dp ${puerto_imagen}:80 --name ${name_final} ${name_imagen}:${tag_imagen}
- 
+
                     '''
                     }
-                    
+
                 }                    
-                                  
+
             }
-            
-          
+
+
         }   
     }
